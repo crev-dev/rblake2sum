@@ -2,7 +2,7 @@
 
 A recursive file-system blake2 digest (hash) tool.
 
-Like `sha256sum`, but for directories, and using `blake2`.
+Like `sha256sum` (or rather, less known `blake2`-based: `b2sum`), but for directories.
 
 The recursive file-system algorithm used is described in a
 underlying library [crev-recursive-digest](https://github.com/crev-dev/recursive-digest).
