@@ -38,4 +38,4 @@ You can compiles from source, using `cargo`:
 cargo install rblake2sum
 ```
 
-or use latest version precompiled binaries.
+or use [precompiled release binaries](https://github.com/crev-dev/rblake2sum/releases).
