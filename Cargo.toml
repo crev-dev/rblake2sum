@@ -12,9 +12,9 @@ repository = "https://github.com/crev-dev/cargo-crev/tree/master/rblake2sum"
 readme = "README.md"
 
 [dependencies]
-base64 = "0.10"
+base64 = "0.11"
 blake2 = "0.8"
 common_failures = "0.1"
 crev-recursive-digest = { version = "0.2" }
-hex = "0.3"
-structopt = "0.2"
+hex = "0.4"
+structopt = "0.3"
