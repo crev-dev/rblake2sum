@@ -1,6 +1,6 @@
 # `rblake2sum`
 
-A recursive file-system blake2 digest (hash) tool.
+A recursive blake2 digest (hash) of a file-system path.
 
 Like `sha256sum` (or rather, less known `blake2`-based: `b2sum`), but for directories.
 
