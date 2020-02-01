@@ -7,6 +7,10 @@ Like `sha256sum`, but for directories, and using `blake2`.
 The recursive file-system algorihtm used is described in a
 underlying library [crev-recursive-digest](https://github.com/crev-dev/recursive-digest).
 
+Under the hood it uses [`walkdir`](https://crates.io/crates/walkdir) and
+[`blake2`](https://crates.io/crates/blake2), with an efficient IO handling, which makes
+it fast.
+
 ## Using
 
 ```
