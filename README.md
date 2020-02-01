@@ -4,11 +4,11 @@ A recursive file-system blake2 digest (hash) tool.
 
 Like `sha256sum`, but for directories, and using `blake2`.
 
-The recursive file-system algorihtm used is described in a
+The recursive file-system algorithm used is described in a
 underlying library [crev-recursive-digest](https://github.com/crev-dev/recursive-digest).
 
-Under the hood it uses [`walkdir`](https://crates.io/crates/walkdir) and
-[`blake2`](https://crates.io/crates/blake2), with an efficient IO handling, which makes
+Under the hood, it uses [`walkdir`](https://crates.io/crates/walkdir) and
+[`blake2`](https://crates.io/crates/blake2), with efficient IO handling, which makes
 it fast.
 
 ## Using
@@ -36,7 +36,7 @@ ARGS:
 
 ## Installing
 
-You can compiles from source, using `cargo`:
+You can compile from source, using `cargo`:
 
 ```
 cargo install rblake2sum
@@ -65,7 +65,7 @@ $ rblake2sum a
 6e4a518652881f356d863ae034e7508648455536e5393824b5cc96232786a4733ffb9c3cdd62bda4741ca0bfe60a181f6ae47959ceb0493716699e9b28f686ac a
 ```
 
-Name of the files or directories in the path, is a part of its content.
+The name of the files or directories in the path is a part of its content.
 
 
 In the simplest case, a `rblake2sum` of a file is like a normal `b2sum` of the content, except
