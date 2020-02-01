@@ -1,6 +1,6 @@
 [package]
 name = "rblake2sum"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Dawid Ciężarkiewicz <dpc@dpc.pw>"]
 edition = "2018"
 description = "Library implementing recursive digest for filesystem directories"
