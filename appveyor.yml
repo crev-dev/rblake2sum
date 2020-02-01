@@ -69,7 +69,7 @@ for:
   deploy:
     artifact: windep
     auth_token:
-      secure: x1b6Wm5JImKLmkZZSGxNvxTiRqTpk5Fi/+ttBL+CHOPg1ChRXbbhmwLwdqXzmlXi
+      secure: wCfX3C2GdWZbVR69JIDqKnQmrkm2Qylm1d1wJ6bDnqtlMZm+jr2QAB/nL8aS7ww/
     description: ''
     on:
       appveyor_repo_tag: true
