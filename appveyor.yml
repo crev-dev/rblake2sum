@@ -42,7 +42,7 @@ environment:
     - channel: 1.41.0 # Oldest supported version. Keep in sync with README.md.
       target: x86_64-pc-windows-msvc
 
-deploy_script:
+before_deploy:
   - ps: |
         $NAME = "rblake2sum-${env:APPVEYOR_REPO_TAG_NAME}-${env:TARGET}"
         New-Item -Path $NAME -ItemType directory
