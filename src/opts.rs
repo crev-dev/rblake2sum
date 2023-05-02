@@ -1,14 +1,11 @@
+use clap::Parser;
 use std::path::PathBuf;
-use structopt::StructOpt;
 
-#[derive(Debug, StructOpt, Clone)]
-#[structopt(
-    name = "rblake2sum",
-    about = "Calculate recursive blake2 digest for path or directory"
-)]
+#[derive(Parser, Debug, Clone)]
+#[command(author, version, about, long_about = None)]
 pub struct Opts {
-    #[structopt(long = "base64")]
+    #[arg(long = "base64")]
     pub base64: bool,
-    #[structopt(parse(from_os_str))]
+    #[arg(required = true)]
     pub paths: Vec<PathBuf>,
 }

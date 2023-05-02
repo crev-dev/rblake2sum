@@ -3,18 +3,18 @@ name = "rblake2sum"
 version = "0.3.0"
 authors = ["Dawid Ciężarkiewicz <dpc@dpc.pw>"]
 edition = "2018"
-description = "Library implementing recursive digest for filesystem directories"
+description = "Calculate recursive blake2 digest for path or directory"
 keywords = ["data", "filesystem", "digest", "hash"]
 license = "MPL-2.0 OR MIT OR Apache-2.0"
 documentation = "https://docs.rs/rblake2sum"
-homepage = "https://github.com/crev-dev/cargo-crev/tree/master/rblake2sum"
-repository = "https://github.com/crev-dev/cargo-crev/tree/master/rblake2sum"
+homepage = "https://github.com/crev-dev/rblake2sum"
+repository = "https://github.com/crev-dev/rblake2sum"
 readme = "README.md"
 
 [dependencies]
+anyhow = "1.0.71"
 base64 = "0.21"
 blake2 = "0.10.6"
-common_failures = "0.1"
 crev-recursive-digest = { version = "0.6.0" }
 hex = "0.4"
-structopt = "0.3"
+clap = { version = "4.2.7", features = ["derive"] }

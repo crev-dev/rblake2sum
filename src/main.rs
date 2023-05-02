@@ -1,11 +1,10 @@
+use base64::Engine;
+use clap::Parser;
+
 mod opts;
 
-use base64::Engine;
-use common_failures::prelude::*;
-use structopt::StructOpt;
-
-fn main() -> Result<()> {
-    let opts = opts::Opts::from_args();
+fn main() -> anyhow::Result<()> {
+    let opts = opts::Opts::parse();
 
     for path in opts.paths {
         let digest = crev_recursive_digest::RecursiveDigest::<blake2::Blake2b512, _, _>::new()
