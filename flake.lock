@@ -191,17 +191,17 @@
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1696569131,
-        "narHash": "sha256-a4Pr+nSatryUVIpVSqCF6Xpnke2ejQD65I7D8DHc1gg=",
+        "lastModified": 1696569653,
+        "narHash": "sha256-KccuXcR0yU7YnAX70aqpIbD/4MDtvLVkSZSK1NCRFbw=",
         "owner": "rustshop",
         "repo": "flakebox",
-        "rev": "3fa3fd9f98cb8cb842b0f60cb5b2ed9314727e6a",
+        "rev": "00baca64cf47f00dceb6782bcbbc37307fdb51fd",
         "type": "github"
       },
       "original": {
         "owner": "rustshop",
         "repo": "flakebox",
-        "rev": "3fa3fd9f98cb8cb842b0f60cb5b2ed9314727e6a",
+        "rev": "00baca64cf47f00dceb6782bcbbc37307fdb51fd",
         "type": "github"
       }
     },
