@@ -1,74 +1,62 @@
 {
-  description = "dpc's basic flake template";
+  description = "A recursive blake2 digest (hash) of a file-system path";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
-    crane.url = "github:ipetkov/crane";
-    crane.inputs.nixpkgs.follows = "nixpkgs";
-    fenix = {
-      url = "github:nix-community/fenix";
+    flakebox = {
+      url = "github:rustshop/flakebox?rev=dd64cdf2a19a1f5241c68f3220139f4a9cbdb01e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, crane, fenix }:
+  outputs = { self, nixpkgs, flake-utils, flakebox }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
+        projectName = "rblake2sum";
+
+        flakeboxLib = flakebox.lib.${system} {
+          config = {
+            github.ci.buildOutputs = [ ".#ci.rblake2sum" ];
+            typos.pre-commit.enable = false;
+          };
         };
-        lib = pkgs.lib;
-        fenixChannel = fenix.packages.${system}.stable;
-        fenixToolchain = (fenixChannel.withComponents [
-          "rustc"
-          "cargo"
-          "clippy"
-          "rust-analysis"
-          "rust-src"
-          "rustfmt"
-        ]);
-        craneLib = crane.lib.${system}.overrideToolchain fenixToolchain;
 
-        commonArgs = {
-          src = craneLib.cleanCargoSource ./.;
+        buildPaths = [
+          "Cargo.toml"
+          "Cargo.lock"
+          ".cargo"
+          "src"
+        ];
 
-          buildInputs = with pkgs; [
-          ];
-
-          nativeBuildInputs = with pkgs; [
-          ];
+        buildSrc = flakeboxLib.filterSubPaths {
+          root = builtins.path {
+            name = projectName;
+            path = ./.;
+          };
+          paths = buildPaths;
         };
+
+        multiBuild =
+          (flakeboxLib.craneMultiBuild { }) (craneLib':
+            let
+              craneLib = (craneLib'.overrideArgs {
+                pname = "flexbox-multibuild";
+                src = buildSrc;
+              });
+            in
+            {
+              rblake2sum = craneLib.buildPackage { };
+            });
       in
       {
-        packages.default = craneLib.buildPackage ({ } // commonArgs);
+        packages.default = multiBuild.rblake2sum;
+
+        legacyPackages = multiBuild;
 
         devShells = {
-          default = pkgs.mkShell {
-
-            buildInputs = with pkgs; [ ] ++ commonArgs.buildInputs;
-            nativeBuildInputs = with pkgs; [
-              fenix.packages.${system}.rust-analyzer
-              fenixToolchain
-              cargo-udeps
-
-              # This is required to prevent a mangled bash shell in nix develop
-              # see: https://discourse.nixos.org/t/interactive-bash-with-nix-develop-flake/15486
-              (hiPrio pkgs.bashInteractive)
-
-              # Nix
-              pkgs.nixpkgs-fmt
-              pkgs.shellcheck
-              pkgs.rnix-lsp
-              pkgs.nodePackages.bash-language-server
-
-            ] ++ commonArgs.nativeBuildInputs;
-            shellHook = ''
-              dot_git="$(git rev-parse --git-common-dir)"
-              if [[ ! -d "$dot_git/hooks" ]]; then mkdir "$dot_git/hooks"; fi
-              for hook in misc/git-hooks/* ; do ln -sf "$(pwd)/$hook" "$dot_git/hooks/" ; done
-              ${pkgs.git}/bin/git config commit.template $(pwd)/misc/git-hooks/commit-template.txt
-            '';
+          default = flakeboxLib.mkDevShell {
+            packages = [ ];
           };
         };
       }

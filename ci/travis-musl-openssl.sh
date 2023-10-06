@@ -6,7 +6,7 @@ case "$TARGET" in
         OPTIONS=(linux-x86_64)
         ;;
     i686-*)
-        OPTIONS=(linux-generic32 -m32 -Wl,-melf_i386)
+        OPTIONS=(linux-generic32 -m32 "-Wl,-melf_i386")
         ;;
 esac
 
