@@ -18,3 +18,23 @@ blake2 = "0.10.6"
 crev-recursive-digest = { version = "0.6.0" }
 hex = "0.4"
 clap = { version = "4.2.7", features = ["derive"] }
+
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = true
+
+[profile.ci]
+inherits = "dev"
+debug = 1
+incremental = false
+
+# Workaround: https://github.com/rust-lang/cargo/issues/12457 which causes
+#             https://github.com/ipetkov/crane/issues/370
+[profile.dev.build-override]
+debug = false
+[profile.ci.build-override]
+debug = false
+[profile.release.build-override]
+debug = false
